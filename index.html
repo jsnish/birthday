@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Nimmy akka 🎉</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  text-align:center;
+  background:linear-gradient(135deg,#ff6a00,#ee0979);
+  color:white;
+  overflow:hidden;
+}
+
+.container{
+  position:relative;
+  z-index:2;
+  padding:20px;
+}
+
+h1{
+  font-size:30px;
+  margin-top:20px;
+}
+
+img{
+  width:90%;
+  max-width:350px;
+  border-radius:20px;
+  margin-top:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+p{
+  font-size:18px;
+  margin-top:15px;
+}
+
+button{
+  padding:12px 20px;
+  font-size:16px;
+  border:none;
+  border-radius:10px;
+  margin-top:20px;
+  background:white;
+  color:#ee0979;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+canvas{
+  position:fixed;
+  top:0;
+  left:0;
+  pointer-events:none;
+  z-index:1;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<div class="container">
+  <h1>🎂 Happy Birthday Nimmy akka 🎉</h1>
+
+  <!-- IMAGE -->
+  <img src="nimmy.jpg" alt="Nimmy akka">
+
+  <p>
+    Wishing you a day filled with happiness, love and beautiful memories.  
+    May this year bring you success, health and endless smiles. ✨
+  </p>
+
+  <button onclick="startConfetti()">Celebrate 🎊</button>
+</div>
+
+<script>
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let confetti = [];
+
+function startConfetti(){
+  confetti = [];
+  for(let i=0;i<200;i++){
+    confetti.push({
+      x: Math.random()*canvas.width,
+      y: Math.random()*canvas.height,
+      r: Math.random()*6+4,
+      d: Math.random()*50,
+      color: "hsl(" + Math.random()*360 + ",100%,50%)"
+    });
+  }
+}
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  confetti.forEach((c)=>{
+    ctx.beginPath();
+    ctx.fillStyle=c.color;
+    ctx.arc(c.x,c.y,c.r,0,Math.PI*2);
+    ctx.fill();
+
+    c.y += 2;
+    if(c.y>canvas.height){
+      c.y=0;
+    }
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+</body>
+</html>
